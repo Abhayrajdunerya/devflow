@@ -18,7 +18,7 @@ export async function GET() {
       { status: 200 }
     );
   } catch (error) {
-    return handleError(error) as APIErrorResponse;
+    return handleError(error, "api") as APIErrorResponse;
   }
 }
 
@@ -47,6 +47,6 @@ export async function POST(request: Request) {
       { status: 201 }
     );
   } catch (error) {
-    return handleError(error) as APIErrorResponse;
+    return handleError(error, "api") as APIErrorResponse;
   }
 }
