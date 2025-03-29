@@ -87,7 +87,7 @@ const DataRenderer = <T,>({
         image={{
           light: "/images/light-error.png",
           dark: "/images/dark-error.png",
-          alt: "Empty state illustration",
+          alt: "Error state illustration",
         }}
         title={error?.message || DEFAULT_ERROR.title}
         message={

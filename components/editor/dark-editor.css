@@ -43,6 +43,8 @@
   --admonitionNoteBg: var(--mauve-4);
   --admonitionNoteBorder: var(--mauve-8);
 
+  --tw-prose-links: var(--accentText);
+
   font-family:
     system-ui,
     -apple-system,
@@ -61,4 +63,8 @@
   color: var(--baseText);
   --basePageBg: black;
   background: var(--basePageBg);
+}
+
+.dark-editor span a {
+  color: white;
 }
