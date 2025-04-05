@@ -3,7 +3,7 @@
 import { AnswerSchema } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MDXEditorMethods } from "@mdxeditor/editor";
-import { useRef, useState } from "react";
+import { useRef, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
@@ -17,12 +17,15 @@ import {
   FormMessage,
 } from "../ui/form";
 import dynamic from "next/dynamic";
+import { createAnswer } from "@/lib/actions/answer.action";
+import { toast } from "@/hooks/use-toast";
 const Editor = dynamic(() => import("@/components/editor"), {
   ssr: false,
 });
 
-const AnswerForm = () => {
+const AnswerForm = ({ questionId }: { questionId: string }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAnswering, startAnsweringTransition] = useTransition();
   const [isAISubmitting, setIsAISubmitting] = useState(false);
 
   const editorRef = useRef<MDXEditorMethods>(null);
@@ -35,7 +38,27 @@ const AnswerForm = () => {
   });
 
   const handleSubmit = async (values: z.infer<typeof AnswerSchema>) => {
-    console.log(values);
+    startAnsweringTransition(async () => {
+      const result = await createAnswer({
+        questionId,
+        content: values.content,
+      });
+
+      if (result.success) {
+        form.reset();
+
+        toast({
+          title: "Success",
+          description: "Your answer has been posted successfully",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: result.error?.message,
+          variant: "destructive",
+        });
+      }
+    });
   };
 
   return (
