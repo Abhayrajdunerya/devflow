@@ -43,6 +43,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       </head>
       <SessionProvider session={session}>
         <body
+          suppressHydrationWarning
           className={`${inter.className} ${spaceGrotesk.variable} antialiased`}
         >
           <ThemeProvider

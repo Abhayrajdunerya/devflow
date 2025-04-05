@@ -7,17 +7,19 @@ import ROUTES from "@/constants/routes";
 import Metric from "@/components/Metric";
 import { getTimeStamp, formatNumber } from "@/lib/utils";
 import TagCard from "@/components/cards/TagCard";
-import Preview from "@/components/editor/Preview";
 import { getQuestion, incrementViews } from "@/lib/actions/question.action";
 import { redirect } from "next/navigation";
+import { Preview } from "@/components/editor/Preview";
+import { after } from "next/server";
 
 const QuestionDetails = async ({ params }: RouteParams) => {
   const { id } = await params;
 
-  const [_, { success, data: question }] = await Promise.all([
-    await incrementViews({ questionId: id }),
-    await getQuestion({ questionId: id }),
-  ]);
+  const { success, data: question } = await getQuestion({ questionId: id });
+
+  after(async () => {
+    await incrementViews({ questionId: id });
+  });
 
   if (!success || !question) return redirect("/404");
 
@@ -73,7 +75,7 @@ const QuestionDetails = async ({ params }: RouteParams) => {
         />
       </div>
 
-      <Preview content={content} />
+      {/* <Preview content={content} /> */}
 
       <div className="mt-8 flex flex-wrap gap-2">
         {tags.map((tag: Tag) => (
