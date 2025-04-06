@@ -39,7 +39,7 @@ const AnswerCard = ({ _id, author, content, createdAt }: Answer) => {
         <div className="flex justify-end">Votes</div>
       </div>
 
-      {/* <Preview content={content} /> */}
+      <Preview content={content} />
     </article>
   );
 };

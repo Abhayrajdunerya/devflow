@@ -89,7 +89,7 @@ const QuestionDetails = async ({ params }: RouteParams) => {
         />
       </div>
 
-      {/* <Preview content={content} /> */}
+      <Preview content={content} />
 
       <div className="mt-8 flex flex-wrap gap-2">
         {tags.map((tag: Tag) => (
