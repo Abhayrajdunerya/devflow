@@ -47,7 +47,8 @@ export async function POST(req: Request) {
 
     const { text } = await generateText({
       //   model: openai("chatgpt-4o-latest"),
-      model: google("gemini-2.5-pro-exp-03-25"),
+      // model: google("gemini-2.5-pro-exp-03-25"),
+      model: google("gemini-2.0-flash-lite"),
       prompt: generatePrompt({ question, content, userAnswer }),
       system: generateSystem(),
     });
