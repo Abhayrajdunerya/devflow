@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import { RouteParams, Tag } from "@/types/global";
 import Link from "next/link";
@@ -64,13 +64,15 @@ const QuestionDetails = async ({ params }: RouteParams) => {
             </Link>
           </div>
           <div className="flex justify-end">
-            <Votes
-              targetType="question"
-              upvotes={question.upvotes}
-              downvotes={question.downvotes}
-              targetId={question._id}
-              hasVotedPromise={hasVotedPromise}
-            />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Votes
+                targetType="question"
+                upvotes={question.upvotes}
+                downvotes={question.downvotes}
+                targetId={question._id}
+                hasVotedPromise={hasVotedPromise}
+              />
+            </Suspense>
           </div>
         </div>
 
