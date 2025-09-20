@@ -5,10 +5,10 @@ import { useSession } from "next-auth/react";
 import { use, useState } from "react";
 
 import { toast } from "@/hooks/use-toast";
+import { createVote } from "@/lib/actions/vote.action";
 import { formatNumber } from "@/lib/utils";
 import { HasVotedResponse } from "@/types/action";
 import { ActionResponse } from "@/types/global";
-import { createVote } from "@/lib/actions/vote.action";
 
 interface Params {
   targetType: "question" | "answer";
