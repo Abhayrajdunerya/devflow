@@ -65,3 +65,7 @@ interface HasVotedResponse {
   hasUpvoted: boolean;
   hasDownvoted: boolean;
 }
+
+interface GetUserParams {
+  userId: string;
+}
