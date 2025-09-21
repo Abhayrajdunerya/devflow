@@ -122,17 +122,14 @@ const QuestionDetails = async ({ params, searchParams }: RouteParams) => {
 
       <div className="mt-8 flex flex-wrap gap-2">
         {tags.map((tag: Tag) => (
-          <TagCard
-            key={tag._id}
-            _id={tag._id as string}
-            name={tag.name}
-            compact
-          />
+          <TagCard key={tag._id} _id={tag._id} name={tag.name} compact />
         ))}
       </div>
 
       <section className="my-5">
         <AllAnswers
+          page={Number(page) || 1}
+          isNext={answersResult?.isNext || false}
           data={answersResult?.answers}
           success={areAnswersLoaded}
           error={answersError}
