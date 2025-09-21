@@ -82,7 +82,7 @@ export async function getUsers(
 
 export async function getUser(params: GetUserParams): Promise<
   ActionResponse<{
-    user: typeof User;
+    user: UserType;
     totalQuestions: number;
     totalAnswers: number;
   }>
