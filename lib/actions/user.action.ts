@@ -2,17 +2,18 @@
 
 import { FilterQuery } from "mongoose";
 
-import { User } from "@/database";
+import { Answer, Question, User } from "@/database";
 
 import action from "../handlers/action";
 import handleError from "../handlers/error";
-import { PaginatedSearchParamsSchema } from "../validations";
+import { GetUserSchema, PaginatedSearchParamsSchema } from "../validations";
 import {
   PaginatedSearchParams,
   ActionResponse,
   ErrorResponse,
   User as UserType,
 } from "@/types/global";
+import { GetUserParams } from "@/types/action";
 
 export async function getUsers(
   params: PaginatedSearchParams
