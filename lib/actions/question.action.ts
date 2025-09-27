@@ -21,23 +21,10 @@ import {
 
 import dbConnect from "../mongoose";
 import { createInteraction } from "./interaction.action";
-import {
-  CreateQuestionParams,
-  EditQuestionParams,
-  GetQuestionParams,
-  IncrementViewsParams,
-  DeleteQuestionParams,
-} from "@/types/action";
-import {
-  ActionResponse,
-  ErrorResponse,
-  PaginatedSearchParams,
-  Question as QuestionType,
-} from "@/types/global";
 
 export async function createQuestion(
   params: CreateQuestionParams
-): Promise<ActionResponse<QuestionType>> {
+): Promise<ActionResponse<Question>> {
   const validationResult = await action({
     params,
     schema: AskQuestionSchema,
@@ -214,7 +201,7 @@ export async function editQuestion(
 
 export async function getQuestion(
   params: GetQuestionParams
-): Promise<ActionResponse<QuestionType>> {
+): Promise<ActionResponse<Question>> {
   const validationResult = await action({
     params,
     schema: GetQuestionSchema,
@@ -241,7 +228,7 @@ export async function getQuestion(
 
 export async function getQuestions(params: PaginatedSearchParams): Promise<
   ActionResponse<{
-    questions: QuestionType[];
+    questions: Question[];
     isNext: boolean;
   }>
 > {
@@ -345,9 +332,7 @@ export async function incrementViews(
   }
 }
 
-export async function getHotQuestions(): Promise<
-  ActionResponse<QuestionType[]>
-> {
+export async function getHotQuestions(): Promise<ActionResponse<Question[]>> {
   try {
     await dbConnect();
 

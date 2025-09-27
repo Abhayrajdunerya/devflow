@@ -15,13 +15,6 @@ import {
   UpdateVoteCountSchema,
 } from "../validations";
 import { createInteraction } from "./interaction.action";
-import { ActionResponse, ErrorResponse } from "@/types/global";
-import {
-  CreateVoteParams,
-  HasVotedParams,
-  HasVotedResponse,
-  UpdateVoteCountParams,
-} from "@/types/action";
 
 async function updateVoteCount(
   params: UpdateVoteCountParams,

@@ -6,7 +6,6 @@ import mongoose from "mongoose";
 import { signIn } from "@/auth";
 import Account from "@/database/account.model";
 import User from "@/database/user.model";
-import { ActionResponse, ErrorResponse } from "@/types/global";
 
 import action from "../handlers/action";
 import handleError from "../handlers/error";
@@ -16,13 +15,13 @@ import { SignInSchema, SignUpSchema } from "../validations";
 export async function signUpWithCredentials(
   params: AuthCredentials
 ): Promise<ActionResponse> {
-  const validatedResult = await action({ params, schema: SignUpSchema });
+  const validationResult = await action({ params, schema: SignUpSchema });
 
-  if (validatedResult instanceof Error) {
-    return handleError(validatedResult) as ErrorResponse;
+  if (validationResult instanceof Error) {
+    return handleError(validationResult) as ErrorResponse;
   }
 
-  const { name, username, email, password } = validatedResult.params!;
+  const { name, username, email, password } = validationResult.params!;
 
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -76,13 +75,13 @@ export async function signUpWithCredentials(
 export async function signInWithCredentials(
   params: Pick<AuthCredentials, "email" | "password">
 ): Promise<ActionResponse> {
-  const validatedResult = await action({ params, schema: SignInSchema });
+  const validationResult = await action({ params, schema: SignInSchema });
 
-  if (validatedResult instanceof Error) {
-    return handleError(validatedResult) as ErrorResponse;
+  if (validationResult instanceof Error) {
+    return handleError(validationResult) as ErrorResponse;
   }
 
-  const { email, password } = validatedResult.params!;
+  const { email, password } = validationResult.params!;
 
   try {
     const existingUser = await User.findOne({ email });

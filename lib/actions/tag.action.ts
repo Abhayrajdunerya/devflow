@@ -1,24 +1,16 @@
-import {
-  ActionResponse,
-  ErrorResponse,
-  PaginatedSearchParams,
-  Question as QuestionType,
-  Tag as TagType,
-} from "@/types/global";
+import { FilterQuery } from "mongoose";
 import action from "../handlers/action";
+import handleError from "../handlers/error";
 import {
   GetTagQuestionsSchema,
   PaginatedSearchParamsSchema,
 } from "../validations";
-import handleError from "../handlers/error";
-import { FilterQuery } from "mongoose";
 import { Question, Tag } from "@/database";
-import { GetTagQuestionsParams } from "@/types/action";
 import dbConnect from "../mongoose";
 
 export const getTags = async (
   params: PaginatedSearchParams
-): Promise<ActionResponse<{ tags: TagType[]; isNext: boolean }>> => {
+): Promise<ActionResponse<{ tags: Tag[]; isNext: boolean }>> => {
   const validationResult = await action({
     params,
     schema: PaginatedSearchParamsSchema,
@@ -84,7 +76,7 @@ export const getTags = async (
 export const getTagQuestions = async (
   params: GetTagQuestionsParams
 ): Promise<
-  ActionResponse<{ tag: TagType; questions: QuestionType[]; isNext: boolean }>
+  ActionResponse<{ tag: Tag; questions: Question[]; isNext: boolean }>
 > => {
   const validationResult = await action({
     params,
@@ -138,7 +130,7 @@ export const getTagQuestions = async (
   }
 };
 
-export const getTopTags = async (): Promise<ActionResponse<TagType[]>> => {
+export const getTopTags = async (): Promise<ActionResponse<Tag[]>> => {
   try {
     await dbConnect();
 

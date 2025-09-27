@@ -6,11 +6,6 @@ import { IInteractionDoc } from "@/database/interaction.model";
 import action from "../handlers/action";
 import handleError from "../handlers/error";
 import { CreateInteractionSchema } from "../validations";
-import {
-  CreateInteractionParams,
-  UpdateReputationParams,
-} from "@/types/action";
-import { ActionResponse, ErrorResponse } from "@/types/global";
 
 export async function createInteraction(
   params: CreateInteractionParams
@@ -29,7 +24,7 @@ export async function createInteraction(
     action: actionType,
     actionId,
     actionTarget,
-    authorId, // target user who owns the content (question/answer)
+    authorId, // person who owns the content (question/answer)
   } = validationResult.params!;
   const userId = validationResult.session?.user?.id;
 
@@ -49,6 +44,7 @@ export async function createInteraction(
       { session }
     );
 
+    // Update reputation for both the performer and the content author
     await updateReputation({
       interaction,
       session,

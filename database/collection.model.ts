@@ -1,4 +1,4 @@
-import { Schema, models, model, Types, Document } from "mongoose";
+import { model, models, Schema, Types, Document } from "mongoose";
 
 export interface ICollection {
   author: Types.ObjectId;

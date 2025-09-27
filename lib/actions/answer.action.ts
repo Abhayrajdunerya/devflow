@@ -16,16 +16,6 @@ import {
   GetAnswersSchema,
 } from "../validations";
 import { createInteraction } from "./interaction.action";
-import {
-  ActionResponse,
-  Answer as AnswerType,
-  ErrorResponse,
-} from "@/types/global";
-import {
-  CreateAnswerParams,
-  DeleteAnswerParams,
-  GetAnswersParams,
-} from "@/types/action";
 
 export async function createAnswer(
   params: CreateAnswerParams
@@ -93,7 +83,7 @@ export async function createAnswer(
 
 export async function getAnswers(params: GetAnswersParams): Promise<
   ActionResponse<{
-    answers: AnswerType[];
+    answers: Answer[];
     isNext: boolean;
     totalAnswers: number;
   }>

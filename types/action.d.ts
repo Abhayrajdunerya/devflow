@@ -1,4 +1,4 @@
-import { PaginatedSearchParams } from "./global";
+// import { PaginatedSearchParams } from "./global";
 
 interface SignInWithOAuthParams {
   provider: "github" | "google";

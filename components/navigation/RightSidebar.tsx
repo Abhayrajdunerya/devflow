@@ -1,21 +1,11 @@
+import ROUTES from "@/constants/routes";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-
-import ROUTES from "@/constants/routes";
-
 import TagCard from "../cards/TagCard";
-import { getTopTags } from "@/lib/actions/tag.action";
 import { getHotQuestions } from "@/lib/actions/question.action";
 import DataRenderer from "../DataRenderer";
-
-const popularTags = [
-  { _id: "1", name: "react", questions: 100 },
-  { _id: "2", name: "javascript", questions: 200 },
-  { _id: "3", name: "typescript", questions: 150 },
-  { _id: "4", name: "nextjs", questions: 50 },
-  { _id: "5", name: "react-query", questions: 75 },
-];
+import { getTopTags } from "@/lib/actions/tag.action";
 
 const RightSidebar = async () => {
   const [
@@ -24,9 +14,10 @@ const RightSidebar = async () => {
   ] = await Promise.all([getHotQuestions(), getTopTags()]);
 
   return (
-    <section className="custom-scrollbar background-light900_dark200 light-border sticky right-0 top-0 flex h-screen w-[350px] flex-col gap-6 overflow-y-auto border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden">
+    <section className="pt-36 custom-scrollbar background-light900_dark200 light-border sticky right-0 top-0 flex h-screen w-[350px] flex-col gap-6 overflow-y-auto border-l p-6 shadow-light-300 dark:shadow-none max-xl:hidden">
       <div>
         <h3 className="h3-bold text-dark200_light900">Top Questions</h3>
+
         <DataRenderer
           data={hotQuestions}
           empty={{
@@ -46,6 +37,7 @@ const RightSidebar = async () => {
                   <p className="body-medium text-dark500_light700 line-clamp-2">
                     {title}
                   </p>
+
                   <Image
                     src="/icons/chevron-right.svg"
                     alt="Chevron"
@@ -62,6 +54,7 @@ const RightSidebar = async () => {
 
       <div className="mt-16">
         <h3 className="h3-bold text-dark200_light900">Popular Tags</h3>
+
         <DataRenderer
           data={tags}
           empty={{

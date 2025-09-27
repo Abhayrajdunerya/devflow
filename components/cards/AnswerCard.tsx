@@ -5,7 +5,7 @@ import { cn, getTimeStamp } from "@/lib/utils";
 
 import { Preview } from "../editor/Preview";
 import UserAvatar from "../UserAvatar";
-import { Answer } from "@/types/global";
+// import { Answer } from "@/types/global";
 import { hasVoted } from "@/lib/actions/vote.action";
 import { Suspense } from "react";
 import Votes from "../votes/Votes";
