@@ -7,7 +7,6 @@ import { UserFilters } from "@/constants/filters";
 import ROUTES from "@/constants/routes";
 import { EMPTY_USERS } from "@/constants/states";
 import { getUsers } from "@/lib/actions/user.action";
-import { RouteParams } from "@/types/global";
 import React from "react";
 
 const Community = async ({ searchParams }: RouteParams) => {
